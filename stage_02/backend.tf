@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "CHORUS-TRE"
+    organization = "qndn-dot"
     workspaces {
       project = "chorus-install"
       tags    = ["stage_02"]

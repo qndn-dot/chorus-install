@@ -1,7 +1,7 @@
 variable "github_orga" {
   description = "GitHub organization to use repositories from"
   type        = string
-  default     = "CHORUS-TRE"
+  default     = "qndn-dot"
 }
 
 variable "helm_values_repo" {

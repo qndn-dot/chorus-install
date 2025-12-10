@@ -793,10 +793,10 @@ resource "null_resource" "pull_charts" {
     mkdir -p "$destination"
     for version in $versions; do
       if [ "$registry_password" != "public" ] && [ "$registry_username" != "public" ]; then
-        helm registry login "${var.source_helm_registry}" --username="${var.source_helm_registry_username}" --password="${var.source_helm_registry_password}"
+        helm registry login --insecure "${var.source_helm_registry}" --username="${var.source_helm_registry_username}" --password="${var.source_helm_registry_password}"
       fi
       if [ ! -f "$destination/$chart-$version.tgz" ]; then
-        helm pull "oci://${var.source_helm_registry}/charts/$chart" --version "$version" --destination "$destination"
+        helm pull --insecure-skip-tls-verify "oci://${var.source_helm_registry}/charts/$chart" --version "$version" --destination "$destination"
       fi
     done
     EOT
@@ -818,12 +818,12 @@ resource "null_resource" "push_charts" {
     set -e
     source=${path.module}/charts
     harbor_domain=${replace(local.harbor_url, "https://", "")}
-    helm registry login "$harbor_domain" --username="${var.harbor_admin_username}" --password="${var.harbor_admin_password}" --insecure
+    helm registry login --insecure "$harbor_domain" --username="${var.harbor_admin_username}" --password="${var.harbor_admin_password}" --insecure
     chart=${each.key}
     versions="${join(" ", each.value)}"
     for version in $versions; do
       if ! helm show chart "oci://$harbor_domain/charts/$chart" --version "$version" --insecure-skip-tls-verify >/dev/null 2>&1; then
-        helm push "$source/$chart-$version.tgz" "oci://$harbor_domain/charts" --insecure-skip-tls-verify
+        helm push --insecure-skip-tls-verify "$source/$chart-$version.tgz" "oci://$harbor_domain/charts" --insecure-skip-tls-verify
       fi
     done
     EOT

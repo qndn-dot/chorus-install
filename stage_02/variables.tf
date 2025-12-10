@@ -114,7 +114,7 @@ variable "kube_prometheus_stack_chart_name" {
 variable "github_orga" {
   description = "GitHub organization to use repositories from"
   type        = string
-  default     = "CHORUS-TRE"
+  default     = "qndn-dot"
 }
 
 variable "helm_values_repo" {
@@ -132,7 +132,7 @@ variable "helm_values_credentials_secret" {
 variable "github_actions_harbor_robot_username" {
   description = "Harbor robot username used by GitHub Actions"
   type        = string
-  default     = "chorus-tre"
+  default     = "qndn-dot"
 }
 
 variable "argocd_harbor_robot_username" {

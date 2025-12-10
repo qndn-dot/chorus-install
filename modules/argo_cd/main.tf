@@ -91,6 +91,7 @@ resource "kubernetes_secret" "oci-build" {
 
   data = {
     enableOCI = "true"
+    insecure  = "true"
     name      = "chorus-build-harbor"
     password  = var.harbor_robot_password
     type      = "helm"

@@ -39,6 +39,7 @@ resource "helm_release" "keycloak_db" {
   namespace        = var.keycloak_namespace
   create_namespace = false
   wait             = true
+  timeout = 600
 
   values = [var.keycloak_db_helm_values]
 
@@ -66,6 +67,7 @@ resource "helm_release" "keycloak" {
   namespace        = var.keycloak_namespace
   create_namespace = false
   wait             = true
+  timeout = 600
 
   values = [var.keycloak_helm_values]
 

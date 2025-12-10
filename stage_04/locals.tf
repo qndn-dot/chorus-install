@@ -210,7 +210,7 @@ locals {
   backend_db_admin_secret_key = local.backend_db_values_parsed.postgresql.global.postgresql.auth.secretKeys.adminPasswordKey
   backend_db_user_secret_key  = local.backend_db_values_parsed.postgresql.global.postgresql.auth.secretKeys.userPasswordKey
 
-  didata_url = "https://didata.${var.remote_cluster_name}.chorus-tre.ch/"
+  didata_url = "https://didata.${var.remote_cluster_name}.192.168.120.181.nip.io/"
   didata_secrets_content = templatefile("${var.templates_path}/didata_secrets.tmpl",
     {
       didata_app_name    = "didata_chorus"
